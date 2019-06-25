@@ -1,0 +1,23 @@
+<h1><%= post.title %><small> by <%= post.author.name %></small></h1>
+
+<p>
+    <%= moment(post.createAt).calendar() %>
+</p>
+
+<p><%= post.content %></p>
+
+<% post.comments.forEach(function(comment){ %>
+    <p>"<%= comment.content%>"</p>
+<%})%>
+<hr>
+<h3>Comment</h3>
+<hr>
+
+<form action="/posts/<%=post.id%>/comments" method='POST'>
+    <input type="text" name="content" placeholder="Make a comment here...">
+    <input type="submit" value="SEND">
+</form>
+<hr>
+
+
+<a href="/">&larr;Back Home</a>

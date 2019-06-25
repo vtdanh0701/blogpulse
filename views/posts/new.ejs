@@ -1,0 +1,16 @@
+<h1>Create a new post</h1>
+
+<form action="/posts" method="POST">
+
+    <input type="text" name='title'required placeholder = 'Post title....'><br>
+    
+    <select name="authorId" required>
+        <% authors.forEach(function(author){%>
+            <option value="<%=author.id%>"><%=author.name%></option>
+        <%})%>
+    </select><br>
+   
+    <textarea type='text' name='content'></textarea><br>
+    
+    <input type="submit" value='POST!'>
+</form>
