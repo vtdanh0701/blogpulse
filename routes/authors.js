@@ -4,7 +4,9 @@ const router = express.Router();
 
 // GET /authors - returns all authors
 router.get('/', function(req, res){
+    req.session.myPage = req.originalUrl;
     db.author.findAll().then(function(authors){
+        console.log(req.session.myPage)
         res.render('authors/index', {authors});
     })
 })
@@ -16,9 +18,11 @@ router.get('/new', function(req, res){
 
 // POST /authors - create a new author
 router.post('/', function(req, res){
+    
     db.author.create({
         name: req.body.name
     }).then(function(data){
+        
         res.redirect('/authors');
     })
 })

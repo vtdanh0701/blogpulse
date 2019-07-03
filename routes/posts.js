@@ -2,13 +2,16 @@ const express = require('express');
 const db = require('../models');
 const router = express.Router();
 
+
+
 // GET /posts - show all post
 router.get('/', function(req, res){
+    var myLastPage = req.session.myPage;
     db.post.findAll({
         include: [db.author]
     })
         .then(function(posts){
-            res.render('posts/index', {posts});
+            res.render('posts/index', {posts,myLastPage});
         })
 })
 
@@ -24,7 +27,7 @@ router.get('/new', function(req, res){
 router.get('/:id', function(req, res){
     db.post.findOne({
         where: {id: parseInt(req.params.id)},
-        include: [db.author, db.comment]
+        include: [db.author, db.comment, db.tag]
     }).then(function(post){
         res.render('posts/show', {post})
     })

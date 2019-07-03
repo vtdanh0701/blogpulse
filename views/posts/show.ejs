@@ -4,6 +4,16 @@
     <%= moment(post.createAt).calendar() %>
 </p>
 
+<%post.tags.forEach((tag) => {%>
+    <span><%=tag.name%> |</span>
+<%})%>
+
+<form action="/tags" method='POST'>
+    <input type="text" name="name" placeholder="Name">
+    <input type="hidden" name="postId" value="<%= post.id %>">
+    <input type="submit" value="Tag This Post"> 
+</form>
+
 <p><%= post.content %></p>
 
 <% post.comments.forEach(function(comment){ %>
